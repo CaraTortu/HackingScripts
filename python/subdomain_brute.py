@@ -1,4 +1,3 @@
-from re import sub
 from termcolor import colored
 from requests.packages.urllib3.exceptions import InsecureRequestWarning
 import os, os.path, requests, argparse, threading, time

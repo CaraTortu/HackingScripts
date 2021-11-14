@@ -1,2 +1,1 @@
-# subforcer
-A subdomain bruteforcer!
+# My custom written scripts for hacking / enumerating

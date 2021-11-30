@@ -1,4 +1,5 @@
 import socket, argparse, termcolor, threading, time
+from tqdm import tqdm
 
 open_ports = []
 
@@ -24,7 +25,7 @@ def divide_chunks(l, n):
         yield l[i:i + n]
 
 parser = argparse.ArgumentParser()
-parser.add_argument("-t", "--threads", help="Number of threads", type=int, default=25)
+parser.add_argument("-t", "--threads", help="Number of threads", type=int, default=10)
 parser.add_argument("-p", "--ports", help="Ports to scan", type=list, default=range(1, 65536))
 parser.add_argument("-i", "--ip", help="IP to scan", type=str, default="", required=True)
     
@@ -40,4 +41,4 @@ chunks = list(divide_chunks(ports, len(ports)//threads+1))
 for i in range(threads):
     t = threading.Thread(target=get_open_ports, args=(host, chunks[i]))
     t.start()
-    t.join()
+    t.join(0.1)

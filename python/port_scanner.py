@@ -1,5 +1,4 @@
-import socket, argparse, termcolor, threading, time
-from tqdm import tqdm
+import socket, argparse, termcolor, threading
 
 open_ports = []
 

@@ -22,7 +22,7 @@ def detect_algorithm(hash):
         return "sha256"
     elif re.findall(r"([a-fA-F\d]{40})", hash):
         return "sha1"
-    if re.findall(r"([a-fA-F\d]{32})", hash):
+    elif re.findall(r"([a-fA-F\d]{32})", hash):
         return "md5"
 
     else:

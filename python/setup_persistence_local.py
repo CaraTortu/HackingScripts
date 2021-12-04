@@ -193,9 +193,7 @@ if __name__ == '__main__':
         elif sys.argv[3] == '-c' and os.geteuid != 0: cleanup_user(username)
         else: pass
     except IndexError:
-        pass
-
-    if os.geteuid() == 0:
-        root(ip, port)
-    else:
-        user(ip, port, username)
+        if os.geteuid() == 0:
+            root(ip, port)
+        else:
+            user(ip, port, username)

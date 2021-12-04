@@ -99,15 +99,15 @@ if __name__ == '__main__':
     try:
         ip = sys.argv[1]
         port = sys.argv[2]
-    except:
+
+        if ip == '-h' or ip == '--help':
+            funcs().print_help()
+            sys.exit(0)
+    except IndexError:
         funcs().print_help()
         sys.exit(1)
-
-    if sys.argv[1] == '-h' or sys.argv[1] == '--help':
-        funcs().print_help()
-        sys.exit(0)
     
     if os.geteuid() == 0:
         root(ip, port)
     else:
-        user = user(ip, port, os.getlogin())
+        user(ip, port, os.getlogin())

@@ -10,7 +10,7 @@
  ## Hash_cracker.py
  This script is used to classify and crack a hash via wordlist.
  ## Port_Scanner.py
- This script is used to enumerate the open ports of a host in a multitheaded manner.
+ This script is used to enumerate the open ports of a host in a multithreaded manner.
  ## Setup_persistence_local.py
  This script is used to setup persistence in a local system.
  ## Setup_persistence_ssh.py

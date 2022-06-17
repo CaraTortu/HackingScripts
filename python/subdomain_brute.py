@@ -57,9 +57,9 @@ def query_subdomain(subdomains, domain, hide_words, ssl, output):
 
         if len(r.text.split()) != hide_words:
             tqdm.write(colored("[+]", 'green') + f" {subdomain}.{domain} | Words: " + str(len(r.text.split())) + " | Status Code: " + str(r.status_code))
-            f = open(output, "a")
-            f.write(colored("[+]", 'green') + f" {subdomain}.{domain} | Words: " + str(len(r.text.split())) + " | Status Code: " + str(r.status_code) + "\n")
-            f.close()
+            if output != "":
+                with open(output, "r") as f:
+                    f.write(colored("[+]", 'green') + f" {subdomain}.{domain} | Words: " + str(len(r.text.split())) + " | Status Code: " + str(r.status_code) + "\n")
 
 parser = argparse.ArgumentParser(description='Script to bruteforce subdomains')
 parser.add_argument('--threads', help='Threads for enumeration subdomains. Default -> 10', type=int, default=10, required=False)
